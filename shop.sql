@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Сен 29 2017 г., 22:27
+-- Время создания: Окт 05 2017 г., 21:06
 -- Версия сервера: 5.5.53
 -- Версия PHP: 5.5.38
 
@@ -28,14 +28,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categories` (
   `id` bigint(20) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL DEFAULT '""',
   `description` text,
-  `visible` tinyint(1) NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `url` varchar(255) NOT NULL,
+  `visible` tinyint(1) NOT NULL DEFAULT '0',
+  `image` varchar(255) DEFAULT '""',
+  `url` varchar(255) NOT NULL DEFAULT '""',
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
-  `parent_id` bigint(20) DEFAULT NULL
+  `parent_id` bigint(20) DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -46,15 +46,15 @@ CREATE TABLE `categories` (
 
 CREATE TABLE `orders` (
   `id` bigint(20) NOT NULL,
-  `user_id` bigint(20) NOT NULL,
-  `user_name` varchar(255) NOT NULL,
-  `user_phone` varchar(255) DEFAULT NULL,
-  `user_email` varchar(255) NOT NULL,
-  `user_address` varchar(255) NOT NULL,
+  `user_id` bigint(20) NOT NULL DEFAULT '0',
+  `user_name` varchar(255) NOT NULL DEFAULT '""',
+  `user_phone` varchar(255) DEFAULT '""',
+  `user_email` varchar(255) NOT NULL DEFAULT '""',
+  `user_address` varchar(255) NOT NULL DEFAULT '""',
   `comment` text,
   `date_create` datetime NOT NULL,
   `total_price` decimal(10,0) NOT NULL,
-  `status` varchar(255) NOT NULL
+  `status` varchar(255) NOT NULL DEFAULT '""'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -65,10 +65,10 @@ CREATE TABLE `orders` (
 
 CREATE TABLE `pages` (
   `id` bigint(20) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  `visible` tinyint(1) NOT NULL,
-  `url` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL DEFAULT '""',
+  `description` text,
+  `visible` tinyint(1) NOT NULL DEFAULT '0',
+  `url` varchar(255) NOT NULL DEFAULT '""',
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -81,11 +81,11 @@ CREATE TABLE `pages` (
 
 CREATE TABLE `products` (
   `id` bigint(20) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL DEFAULT '""',
   `description` text,
-  `visible` tinyint(1) NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `url` varchar(255) NOT NULL,
+  `visible` tinyint(1) NOT NULL DEFAULT '0',
+  `image` varchar(255) DEFAULT '""',
+  `url` varchar(255) NOT NULL DEFAULT '""',
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -97,9 +97,9 @@ CREATE TABLE `products` (
 --
 
 CREATE TABLE `product_categories` (
-  `product_id` bigint(20) NOT NULL,
-  `category_id` bigint(20) NOT NULL,
-  `position` int(11) DEFAULT NULL
+  `product_id` bigint(20) NOT NULL DEFAULT '0',
+  `category_id` bigint(20) NOT NULL DEFAULT '0',
+  `position` int(11) DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -110,13 +110,13 @@ CREATE TABLE `product_categories` (
 
 CREATE TABLE `purchases` (
   `id` bigint(20) NOT NULL,
-  `order_id` bigint(20) NOT NULL,
-  `product_id` bigint(20) NOT NULL,
-  `product_name` varchar(255) NOT NULL,
-  `variant_id` bigint(20) NOT NULL,
-  `variant_name` varchar(255) NOT NULL,
-  `price` decimal(10,0) NOT NULL,
-  `amount` decimal(10,0) NOT NULL
+  `order_id` bigint(20) NOT NULL DEFAULT '0',
+  `product_id` bigint(20) NOT NULL DEFAULT '0',
+  `product_name` varchar(255) NOT NULL DEFAULT '""',
+  `variant_id` bigint(20) NOT NULL DEFAULT '0',
+  `variant_name` varchar(255) NOT NULL DEFAULT '""',
+  `price` float(15,2) NOT NULL DEFAULT '0.00',
+  `amount` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -127,12 +127,12 @@ CREATE TABLE `purchases` (
 
 CREATE TABLE `users` (
   `id` bigint(20) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `phone` varchar(255) DEFAULT NULL,
-  `email` varchar(255) NOT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `status` varchar(255) DEFAULT NULL
+  `name` varchar(255) NOT NULL DEFAULT '""',
+  `phone` varchar(255) DEFAULT '""',
+  `email` varchar(255) NOT NULL DEFAULT '""',
+  `address` varchar(255) DEFAULT '""',
+  `password` varchar(255) NOT NULL DEFAULT '""',
+  `status` varchar(255) DEFAULT '""'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -143,13 +143,13 @@ CREATE TABLE `users` (
 
 CREATE TABLE `variants` (
   `id` bigint(20) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `price` decimal(10,0) DEFAULT NULL,
-  `amount` decimal(10,0) DEFAULT NULL,
-  `sku` varchar(255) DEFAULT NULL,
-  `old_price` decimal(10,0) DEFAULT NULL,
-  `position` int(11) DEFAULT NULL,
-  `product_id` bigint(20) NOT NULL
+  `name` varchar(255) NOT NULL DEFAULT '""',
+  `price` float(15,2) NOT NULL DEFAULT '0.00',
+  `amount` int(11) NOT NULL DEFAULT '0',
+  `sku` varchar(255) DEFAULT '""',
+  `old_price` float(15,2) DEFAULT '0.00',
+  `position` int(11) DEFAULT '0',
+  `product_id` bigint(20) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
