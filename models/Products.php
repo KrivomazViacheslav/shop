@@ -25,14 +25,14 @@ class Products extends Database
             return false;
         }
 
-        $query = "SELECT id, name, description, url, visible, image FROM products WHERE id = $id LIMIT 1";
+        $query = "SELECT id, name, description, visible, image, url, created, updated FROM products WHERE id = $id LIMIT 1";
         $this->query($query);
         return $this->result();
     }
 
     public function getProducts()
     {
-        $query = "SELECT id, name, description, url, visible, image FROM products";
+        $query = "SELECT id, name, description, visible, image, url, created, updated FROM products";
         $this->query($query);
         return $this->results();
     }

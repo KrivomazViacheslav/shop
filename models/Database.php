@@ -31,6 +31,7 @@ class Database
 
     public function results()
     {
+        $results = array();
         while ($result = $this->res->fetch_assoc()) {
             $results[] = $result;
         }
