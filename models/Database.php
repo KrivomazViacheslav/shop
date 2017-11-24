@@ -32,7 +32,7 @@ class Database
     public function results()
     {
         $results = array();
-        while ($result = $this->res->fetch_assoc()) {
+        while ($result = $this->res->fetch_object()) {
             $results[] = $result;
         }
         return $results;
@@ -40,7 +40,7 @@ class Database
 
     public function result()
     {
-        return $this->res->fetch_assoc();
+        return $this->res->fetch_object();
     }
 
     public function resId()

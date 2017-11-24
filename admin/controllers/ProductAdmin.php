@@ -4,6 +4,7 @@ class ProductAdmin extends CoreAdmin
     public function fetch()
     {
         $product = new stdClass();
+        $product->visible = 0;
         $products = new Products();
         $request = new Request();
 
@@ -29,10 +30,15 @@ class ProductAdmin extends CoreAdmin
             $product = $products->getProduct($id);
         }
 
-        print_r($product);
+        if ($product->visible) {
+            $visibleChecked = ' checked';
+        } else {
+            $visibleChecked = '';
+        }
 
         $array_vars = array(
             'product' => $product,
+            'visibleChecked' => $visibleChecked,
         );
 
         return $this->view->render('product.html',$array_vars);
