@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Окт 05 2017 г., 21:06
+-- Время создания: Ноя 24 2017 г., 22:24
 -- Версия сервера: 5.5.53
 -- Версия PHP: 5.5.38
 
@@ -113,8 +113,6 @@ CREATE TABLE `purchases` (
   `order_id` bigint(20) NOT NULL DEFAULT '0',
   `product_id` bigint(20) NOT NULL DEFAULT '0',
   `product_name` varchar(255) NOT NULL DEFAULT '""',
-  `variant_id` bigint(20) NOT NULL DEFAULT '0',
-  `variant_name` varchar(255) NOT NULL DEFAULT '""',
   `price` float(15,2) NOT NULL DEFAULT '0.00',
   `amount` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -133,23 +131,6 @@ CREATE TABLE `users` (
   `address` varchar(255) DEFAULT '""',
   `password` varchar(255) NOT NULL DEFAULT '""',
   `status` varchar(255) DEFAULT '""'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `variants`
---
-
-CREATE TABLE `variants` (
-  `id` bigint(20) NOT NULL,
-  `name` varchar(255) NOT NULL DEFAULT '""',
-  `price` float(15,2) NOT NULL DEFAULT '0.00',
-  `amount` int(11) NOT NULL DEFAULT '0',
-  `sku` varchar(255) DEFAULT '""',
-  `old_price` float(15,2) DEFAULT '0.00',
-  `position` int(11) DEFAULT '0',
-  `product_id` bigint(20) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -193,12 +174,6 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `variants`
---
-ALTER TABLE `variants`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -221,7 +196,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT для таблицы `purchases`
 --
@@ -231,11 +206,6 @@ ALTER TABLE `purchases`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT для таблицы `variants`
---
-ALTER TABLE `variants`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
