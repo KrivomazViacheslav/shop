@@ -10,7 +10,7 @@ class ProductAdmin extends CoreAdmin
         if($request->method() == 'POST') {
             $product->name = $request->post('name');
             $product->description = $request->post('description');
-            $product->visible = $request->post('visible','integer');
+            $product->visible = $request->post('visible');
             $product->image = $request->post('image');
             if(empty($request->post('url'))) {
                 $product->url = CoreAdmin::translit($request->post('name'));
@@ -28,6 +28,8 @@ class ProductAdmin extends CoreAdmin
 
             $product = $products->getProduct($id);
         }
+
+        print_r($product);
 
         $array_vars = array(
             'product' => $product,
